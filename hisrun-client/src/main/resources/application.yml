@@ -1,0 +1,13 @@
+server:
+  port: 20081
+spring: 
+  application: 
+    name: hisrun-client
+eureka: 
+  client:
+    registry-fetch-interval-seconds: 30 #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    serviceUrl: 
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    com.netflix:DEBUG
