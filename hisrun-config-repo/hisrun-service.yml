@@ -10,6 +10,22 @@ spring:
   profiles: dev  # development env
   application:
     name: hisrun-service
+  redis:
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 50
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 50
+      # 连接池中的最小空闲连接
+      min-idle: 10
+      timeout: 300000
+      maxRedirections: 6
+    cluster: 
+      nodes: 
+        - 192.168.52.133:6378
+        - 192.168.52.133:6379
 eureka:
   client:
     service-url:
@@ -22,6 +38,22 @@ spring:
   profiles: test
   application: 
     name: hisrun-service
+  redis:
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 50
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 50
+      # 连接池中的最小空闲连接
+      min-idle: 10
+      timeout: 300000
+      maxRedirections: 6
+    cluster: 
+      nodes: 
+        - 192.168.52.133:6378
+        - 192.168.52.133:6379
 
 eureka:
   client:
