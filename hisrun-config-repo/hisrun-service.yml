@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active:
+    - dev
+    
+---
+server:
+  port: 20081
+spring:
+  profiles: dev  # development env
+  application:
+    name: hisrun-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10081/eureka/,http://localhost:10081/eureka/
+    
+---
+server:
+  port: 20082
+spring:
+  profiles: test
+  application: 
+    name: hisrun-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10081/eureka/,http://localhost:10081/eureka/
