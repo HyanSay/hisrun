@@ -1,10 +1,16 @@
-server: 
-  port: 8888 
 spring:
+  profiles:
+    active:
+    - dev
+    
+---
+spring:
+  profiles: dev  # development env
   application:
-    name:  hisrun-config-repo
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/HyanSay/hisrun.git #GitHub git repo name
+    name: hisrun-service
+    
+---
+spring:
+  profiles: test
+  application: 
+    name: hisrun-service
