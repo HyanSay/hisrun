@@ -21,7 +21,6 @@ public class UnderWritingCtrl {
 
 	@RequestMapping(value = "/remoteServer", method = RequestMethod.GET)
 	public String savePolicy(HttpServletRequest request) {
-		logger.info("sdfalsdf");
 		NtPrpCmainService.geta();
 		return null;
 
