@@ -1,4 +1,44 @@
-spring:
-  application:
-    name: hisrun-service
+#key: value 冒号后面需要留一个空格
+server:
+  port: 10794 #服务端口
+  connection-timeout: 30000 
+  tomcat:
+    max-connections: 260
+    max-threads: 200
+    min-spare-threads: 80
+logging:
+  config: classpath:logback-spring.xml
+  level: info
+  home: ./log/
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hisrun?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root
+    druid: 
+      initial-size: 1
+      max-active: 20
+      min-idle: 3
+      max-wait: 60000
+      pool-prepared-statements: false
+      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      max-pool-prepared-statement-per-connection-size: 20
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+#注册中心
+eureka:
+  instance: 
+    preferIpAddress: true #在注册中心显示ip
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}        # 将Instance ID设置成IP:端口的形式
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@192.168.1.108:10081/eureka/,http://admin:admin@192.168.1.108:10081/eureka/

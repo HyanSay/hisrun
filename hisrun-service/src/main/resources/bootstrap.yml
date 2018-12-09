@@ -1,8 +1,3 @@
 spring:
-  cloud:
-    config:
-      name: hisrun-service #需要从github上读取的资源名称，注意没有yml后缀名
-      profile: dev
-      label: master
-      uri: http://192.168.1.108:3344  #SpringCloudConfig获取的服务地址
-
+  application:
+    name: hisrun-service #需要从github上读取的资源名称，注意没有yml后缀名
