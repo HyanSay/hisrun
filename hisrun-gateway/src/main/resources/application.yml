@@ -1,0 +1,50 @@
+server:
+  port: 18766
+  
+spring:
+  aop:
+    proxyTargetClass: true
+  logging:
+    config: classpath:logback-spring.xml	# location of config file (default classpath:logback.xml for logback)
+
+#注册中心
+eureka:
+  instance: 
+    preferIpAddress: true #在注册中心显示ip
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}        # 将Instance ID设置成IP:端口的形式
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.103:10081/eureka/
+    
+logging:
+  level:
+    org.springframework.cloud.gateway: info
+    org.springframework.http.server.reactive: info
+    org.springframework.web.reactive: info
+    reactor.ipc.netty: info   
+feign:
+  hystrix:
+    enabled: true
+    
+ribbon: 
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  eager-load: 
+    enabled: true
+  
+hystrix: 
+  command: 
+    default: 
+      execution: 
+        isolation: 
+          thread: 
+            timeoutInMilliseconds: 60000
+            
+management: 
+  endpoints: 
+    web: 
+      exposure: 
+        include: "*"

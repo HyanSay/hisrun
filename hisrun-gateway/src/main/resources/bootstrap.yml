@@ -1,0 +1,18 @@
+spring:
+  application:
+    name:  GatewayServer
+  cloud:
+    gateway: 
+      discovery: 
+        locator: 
+          enabled: true
+          lowerCaseServiceId: true
+      routes: 
+      - id: hisrun-service
+        uri: lb://hisrun-service
+        predicates: 
+          - Path= /hisrun/**
+        filters: 
+          - StripPrefix=1
+          - RequestTime=true
+
