@@ -1,0 +1,59 @@
+#key: value
+server:
+  port: 10795
+  connection-timeout: 30000 
+  tomcat:
+    max-connections: 260
+    max-threads: 200
+    min-spare-threads: 80
+logging:
+  config: classpath:logback-spring.xml
+  level: info
+  home: ./log/
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hisrun?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root
+    druid: 
+      initial-size: 1
+      max-active: 20
+      min-idle: 3
+      max-wait: 60000
+      pool-prepared-statements: false
+      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      max-pool-prepared-statement-per-connection-size: 20
+
+  mail: 
+    default-encoding: UTF-8
+    host: mail.newtouch.cn
+    port: 25
+    protocol: smtp
+    username: zhentao.yang@newtouch.cn
+    password: yang123456
+  
+  rabbitmq: 
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      acknowledge-mode: AUTO
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  instance: 
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@192.168.1.108:10081/eureka/,http://admin:admin@192.168.1.108:10081/eureka/
